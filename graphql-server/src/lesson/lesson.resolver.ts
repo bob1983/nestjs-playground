@@ -24,8 +24,8 @@ export class LessonResolver {
 
   @Mutation(returns => LessonType)
   createLesson(
-    @Args('createLessonInput') CreateLessonInput: CreateLessonInput
+    @Args('createLessonInput') createLessonInput: CreateLessonInput
   ) {
-    return this.lessonService.createLesson(CreateLessonInput)
+    return this.lessonService.createLesson(createLessonInput)
   }
 }
