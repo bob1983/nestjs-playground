@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from './lesson.entity';
 import { Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid'
-import { CreateLessonInput } from './lesson.input';
+import { CreateLessonInput } from './create-lesson.input';
 
 @Injectable()
 export class LessonService {
@@ -25,8 +25,15 @@ export class LessonService {
       id: uuid(),
       name,
       startDate,
-      endDate
+      endDate,
+      students: []
     })
+    return await this.lessonRepository.save(lesson)
+  }
+
+  async assignStudentsToLesson(lessonId: string, studentIds: string[]): Promise<Lesson> {
+    const lesson = await this.getLesson(lessonId)
+    lesson.students = [...lesson.students, ...studentIds]
     return await this.lessonRepository.save(lesson)
   }
 }

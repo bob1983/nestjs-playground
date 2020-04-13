@@ -15,3 +15,4 @@ export class CreateLessonInput {
   @Field()
   endDate: string
 }
+
