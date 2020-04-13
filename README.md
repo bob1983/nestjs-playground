@@ -44,7 +44,7 @@ export class LessonResolver {
   lesson(
     @Args('id') id: string
   ) {
-    this.lessonService.getLesson(id)
+    return this.lessonService.getLesson(id)
   }
 }
 ```
@@ -52,6 +52,17 @@ export class LessonResolver {
 ```ts
 @Query(_ => [LessonType])
 lessons() {
-  this.lessonService.getLessons()
+  return this.lessonService.getLessons()
+}
+```
+
+Mutationは、`@Mutation()`アノテーションで、引数はQueryと同様戻り値の型を返す関数をセットする
+
+```ts
+@Mutation(_ => LessonType)
+createLesson(
+  @Args('createLessonInput') createLessonInput: CreateLessonInput
+) {
+  return this.lessonService.createLesson(createLessonInput)
 }
 ```
